@@ -3,7 +3,7 @@
     <h1>Tables Molecules.</h1>
 
     <div class="row m-4">
-  
+
      <b-form-input
         class="col-7 col-xl-4"
         v-model="filter"
@@ -11,14 +11,14 @@
         id="filterInput"
         placeholder="Type to Search"
       ></b-form-input>
-    
+
         <b-button class="col-2 col-xl-1 mx-4" :disabled="!filter" @click="filter = ''"> Clear </b-button>
- 
+
     <b-col  lg="12" xl="6" md="12" class="my-1">
         <b-form-group
           label-align-sm="right"
           label-size="sm"
-  
+
           class="mb-0">
           <b-form-checkbox-group v-model="filterOn" class="mt-1">
             <b class="pr-2">Filter</b>
@@ -28,8 +28,8 @@
             <b-button v-b-modal.addmole class="fa fa-save bg-success mx-4"> Add molecule</b-button>
           </b-form-checkbox-group>
         </b-form-group>
-      </b-col> 
-    
+      </b-col>
+
     </div>
 
     <!-- Main table element -->
@@ -58,13 +58,13 @@
         </div>
       </template>
       <template v-slot:cell(Name)="row">
-        {{ row.value }} 
+        {{ row.value }}
       </template>
 
       <template v-slot:cell(actions)="row">
         <b-button size="sm"  class="fa fa-trash   bg-danger  mr-1"  @click="Delete_id(row.item)"> <span class="text-info"> Delete </span></b-button>
         <b-button size="sm"  class="fa fa-refresh bg-warning mr-1" @click="showmodal(row.item)"> <span class="text-info"> Edit </span> </b-button>
-    
+
       </template>
       <template v-slot:cell(ris_image)="row">
           <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="fa fa-image mr-1 " >
@@ -73,9 +73,9 @@
         <b-button size="sm" @click="row.toggleDetails" class="fa fa-file-text ">
           {{ row.detailsShowing ? 'Hide' : 'Show' }} RIS
         </b-button>
-      
+
       </template>
-      
+
       <template v-slot:row-details="row">
         <b-card >
           <b-form-textarea
@@ -87,7 +87,7 @@
           </b-form-textarea>
         </b-card>
       </template>
-    
+
     </b-table>
       <b-col sm="7" md="12" class="my-1">
         <b-pagination
@@ -98,15 +98,15 @@
           size="sm"
           class="my-0"
         ></b-pagination>
-        <br/> 
-      </b-col> 
+        <br/>
+      </b-col>
       <div class="p4 d-flex align-items-end">
           <h1 class="fa fa-exclamation-circle text-success mt-auto p-2  mr-4 ">{{ addMoleMensaje}}</h1>
       </div>
     <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
      <b-img class="p-4" fluid-grow :src='data_mole.Image'/>
-    </b-modal> 
-    
+    </b-modal>
+
     <b-modal ref="addmole" id="addmole" title="Add molecule"   hide-footer>
       <b-container fluid>
        <form enctype="multipart/form-data">
@@ -123,7 +123,7 @@
              <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
                <b-input id="formNewnMole.SMILE" v-model="formNewnMole.SMILE" placeholder="Smile"></b-input>
              </b-input-group>
-         
+
                  <b-col sm="2"class="mt-4">
                <label for="formNewnMole.Description">Description</label>
              </b-col>
@@ -156,23 +156,23 @@
                  >Molecule image</label>
                  <input class="p-3" type="file" ref="formNewnMole_imagemol" v-on:change="handleFileUpload()" id="formNewnMole_imagemol" name="imagemol"  accept="image/*">
              </div>
-         </b-row>  
+         </b-row>
        </form>
-       
+
       </b-container>
      <div class="row">
         <b-button  block  class="fa fa-save m-3  p-2 col-3 bg-success mx-4" @click = "addMolelcule()" >Add molecule</b-button>
-        <b-button  block @click="$bvModal.hide('addmole')" class=" m-3  p-2 col-3 bg-danger mx-4">Cerrar</b-button>    
+        <b-button  block @click="$bvModal.hide('addmole')" class=" m-3  p-2 col-3 bg-danger mx-4">Cerrar</b-button>
      </div>
    </b-modal>
-   
-   
-   
+
+
+
     <b-modal ref="updatemole" id="updatemole" title="Update molecule"   hide-footer>
       <b-container fluid>
        <form enctype="multipart/form-data">
          <b-row>
-            <div class="border border-info col-12 mt-4 p-4">ID: {{formodifi.ID}}</div> 
+            <div class="border border-info col-12 mt-4 p-4">ID: {{formodifi.ID}}</div>
              <p><label  for="formodifi.Mol_name" class="p-2">Molecule Name</label></p>
              <b-input
                id="formodifi.Name"
@@ -185,7 +185,7 @@
              <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
                <b-input id="formodifi.SMILE" v-model="formodifi.SMILE" placeholder="Smile"></b-input>
              </b-input-group>
-         
+
                  <b-col sm="2"class="mt-4">
                <label for="formodifi.Description">Description</label>
              </b-col>
@@ -219,17 +219,17 @@
                  : {{formodifi.Image}}
                  <input class="p-3" type="file" ref="formodifi_imagemol" v-on:change="handleFileUploadup()" id="formodifi_imagemol" name="imagemol"  accept="image/*">
              </div>
-         </b-row>  
+         </b-row>
        </form>
-       
+
       </b-container>
      <div class="row">
         <b-button  block  class="fa fa fa-refresh m-3  p-2 col-3 bg-success mx-4" @click = "updateMolelcule()" >Edit molecule</b-button>
-        <b-button  block @click="$bvModal.hide('updatemole')" class=" m-3  p-2 col-3 bg-danger mx-4">Cerrar</b-button>    
+        <b-button  block @click="$bvModal.hide('updatemole')" class=" m-3  p-2 col-3 bg-danger mx-4">Cerrar</b-button>
      </div>
    </b-modal>
-   
-   
+
+
   </b-container>
 
 </template>
@@ -237,7 +237,7 @@
 <script>
 
   export default {
-    data() {	
+    data() {
       return {
     	isBusy:true,
     	formNewnMole: {
@@ -277,7 +277,7 @@
         sortDirection: 'asc',
         filter: null,
         filterOn: [],
-        
+
         infoModal: {
           id: '-1',
           title: '',
@@ -291,8 +291,8 @@
 			RIS:'',
 		},
       }
-     
-      
+
+
     } ,
 
     computed: {
@@ -313,15 +313,15 @@
     	this.totalRows = this.items.length;
     	this.isBusy= false;
       });
-      
+
     },
     methods: {
       info(item, index, button) {
-    	this.imgAndData(item, index, event) 
+    	this.imgAndData(item, index, event)
         this.infoModal.title = item.Name;
         this.infoModal.content = JSON.stringify(item, null, 2)
         this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-      }, 
+      },
       resetInfoModal() {
         this.infoModal.title = ''
         this.infoModal.content = ''
@@ -331,10 +331,10 @@
         this.totalRows = filteredItems.length
         this.currentPage = 1
       },
-      imgAndData(item, index, event){  
+      imgAndData(item, index, event){
     	this.data_mole.Image=  "../../files/data-base-img/"+item.ID+ "/"+item.Imagen;
     	this.data_mole.Name=item.Name;
-    	 
+
       },
       clearaddmol(){
     	this.formNewnMole.Name='';
@@ -343,7 +343,7 @@
     	this.formNewnMole.RIS='';
     	this.formNewnMole.Image= '';
       },
-      
+
       addMolelcule(){
  	   var key, count = 0;
   	   if(this.formNewnMole.Name==="" || this.formNewnMole.SMILE==="" ) {
@@ -351,10 +351,10 @@
 	  	 	this.addMoleMensaje= (this.formNewnMole.Name)+"Error ";
 	  		return 0;
 	  	}
-  	   
+
 
  	   for(key in this.items ) {
- 		 if(this.items[key].Name.toUpperCase() ===this.formNewnMole.Name.toUpperCase() || 
+ 		 if(this.items[key].Name.toUpperCase() ===this.formNewnMole.Name.toUpperCase() ||
  	  	   this.items[key].SMILE.toUpperCase()=== this.formNewnMole.SMILE.toUpperCase() ){
  	  		alert("this Molecule or Smile Exists");
  	  	 	this.addMoleMensaje= (this.formNewnMole.Name)+"Error ";
@@ -362,30 +362,30 @@
  	  	 }
  	   }
        /* Initialize the form data */
-       var formData = new FormData(); 
-         
+       var formData = new FormData();
+
        /*  Add the form data we need to submit */
        formData.append('Image', this.formNewnMole.Image);
        formData.append('Name', this.formNewnMole.Name);
        formData.append('SMILE', this.formNewnMole.SMILE);
        formData.append('Description', this.formNewnMole.Description);
        formData.append('RIS', this.formNewnMole.RIS);
-       
+
        /* Make the request to the POST ../../MoleculeTable URL */
        axios.post( '../../MoleculeTable',formData,{
        headers: { 'Content-Type': 'multipart/form-data'}}
-       ).then(response =>{ 
-    	   	console.log(response.data);	 
+       ).then(response =>{
+    	   	console.log(response.data);
     	   	this.addMoleMensaje=  ' _ '+ this.formNewnMole.Name +" add successful";
     	       axios.get('../../MoleculeTable').then(response =>{
     	       	this.items = response.data;
     	       	this.totalRows = this.items.length;
     	          });
        }
-       ).catch(function(){ this.addMoleMensaje= (this.formNewnMole.Name)+"Error ";}); 
-       	
+       ).catch(function(){ this.addMoleMensaje= (this.formNewnMole.Name)+"Error ";});
 
-       
+
+
        this.clearaddmol();
         axios.get('../../MoleculeTable').then(response =>{
        	this.items = response.data;
@@ -410,7 +410,7 @@
           reader.readAsText(file);
        },
        Delete_id(index){
-    	   
+
     	        this.$bvModal.msgBoxConfirm('Please confirm that you want to delete "'+index.Name +'".', {
     	          title: 'Please Confirm',
     	          size: 'sm',
@@ -423,26 +423,28 @@
     	          centered: true
     	        })
     	        .then(value => {
+                var formData = new FormData();
+                formData.append('_method','DELETE');
     	        if(value ===true){
-    	           	axios.delete( '../../MoleculeTable/'+index.ID).then(
-    	            response =>{ 
+    	           	axios.delete( '../../MoleculeTable/'+index.ID,formData).then(
+    	            response =>{
     	               axios.get('../../MoleculeTable').then(response =>{
     	           	      	this.items = response.data;
     	           	       	this.totalRows = this.items.length;
-    	           	       	
+
     	           	   });
- 
-    	            }).catch(function(){ this.addMoleMensaje= (this.formNewnMole.Name)+"Error ";}); 
-    	            	       
+
+    	            }).catch(function(){ this.addMoleMensaje= (this.formNewnMole.Name)+"Error ";});
+
     	        }
-    	            
+
  	          })
  	          .catch(err => {
  	            // An error occurred
  	          });
     	        this.addMoleMensaje=  ' _ '+ this.formNewnMole.Name +" add successful";
-    	        
-    	     
+
+
        },
        showmodal(index){
     	this.formodifi.ID=index.ID;
@@ -460,10 +462,10 @@
     	  	 	this.addMoleMensaje= (this.formodifi.Name)+"Error ";
     	  		return 0;
     	  	}
-      	   
+
 
      	   for(key in this.items ) {
-     		 if((this.items[key].Name.toUpperCase() ===this.formodifi.Name.toUpperCase() || 
+     		 if((this.items[key].Name.toUpperCase() ===this.formodifi.Name.toUpperCase() ||
      	  	   this.items[key].SMILE.toUpperCase()=== this.formodifi.SMILE.toUpperCase()) && this.formodifi.ID != this.items[key].ID ){
      	  		alert("this Molecule or Smile Exists");
      	  	 	this.addMoleMensaje= (this.formodifi.Name)+"Error ";
@@ -471,38 +473,38 @@
      	  	 }
      	   }
            /* Initialize the form data */
-           var formData = new FormData(); 
-             
+           var formData = new FormData();
+
            /*  Add the form data we need to submit */
            if(this.formodifi.Image !="")
-               formData.append('Image', this.formodifi.Image); 
+               formData.append('Image', this.formodifi.Image);
            formData.append('Name', this.formodifi.Name);
            formData.append('SMILE', this.formodifi.SMILE);
            formData.append('Description', this.formodifi.Description);
            formData.append('RIS', this.formodifi.RIS);
            formData.append('_method','PUT');
            console.log(this.formodifi.Name +" + "+this.formodifi.SMILE)
-           
+
            /* Make the request to the POST ../../MoleculeTable URL */
            axios.post( '../../MoleculeTable/'+this.formodifi.ID,formData,{
            headers: { 'Content-Type': 'multipart/form-data'}}
-           ).then(response =>{ 
-        	   	console.log(response.data);	 
+           ).then(response =>{
+        	   	console.log(response.data);
         	   	this.addMoleMensaje=  ' _ '+ this.formodifi.Name +" modify successful";
         	     axios.get('../../MoleculeTable').then(response =>{
         	           	this.items = response.data;
         	           	this.totalRows = this.items.length;
-        	    
-        	             });   
+
+        	             });
            }
-           ).catch(function(){ this.addMoleMensaje= (this.formodifi.Name)+"Error ";}); 
-           
+           ).catch(function(){ this.addMoleMensaje= (this.formodifi.Name)+"Error ";});
+
            this.clearaddmol();
-          
+
            axios.get('../../MoleculeTable').then(response =>{
            	this.items = response.data;
            	this.totalRows = this.items.length;
-    
+
              });
            this.$refs['updatemole'].hide();
        },
