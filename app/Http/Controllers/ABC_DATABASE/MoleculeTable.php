@@ -157,13 +157,13 @@ class MoleculeTable extends Controller
      */
     public function destroy($id)
     {
+        echo "no funciona";
         try{
     	if (!file_exists(public_path("files/data-base-img/$id"))) {
     		unlink(public_path("files/data-base-img/$id"), 0777, true);
     	}
         }catch (Exception $e) {
           echo("Error al eliminar el archivo");
-
         }finally {
     	$mol = q_db_molecules::find($id);
         $mol->delete();
