@@ -425,6 +425,7 @@
     	        .then(value => {
                 var formData = new FormData();
                 formData.append('_method','DELETE');
+                formData.append('_token',global.csrf);
     	        if(value ===true){
     	           	axios.delete( '../../MoleculeTable/'+index.ID,formData).then(
     	            response =>{

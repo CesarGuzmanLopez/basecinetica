@@ -29,7 +29,8 @@ Vue.use(BootstrapVue)
 //Vue.use(uiv)
 Vue.use(Chartist)
 //Vue.use(d3)
-
+global.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+window.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 Vue.component('tablamodelo', require('./components/TablaModelo.vue').default);
 Vue.component('moleculesabc',require('./components/BD_pk_Koverall/MoleculesABC.vue').default);
 Vue.component('solventsabc',require('./components/BD_pk_Koverall/SolventsABC.vue').default);
@@ -85,6 +86,10 @@ $(window).scroll(function(){
 });
 require('./compare_kO').default;
 });
+
+
+
+
 
 if($("#aux").length!=0) var aux = new Vue({el: '#aux',});
 
