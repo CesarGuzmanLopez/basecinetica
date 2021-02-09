@@ -411,6 +411,7 @@
        },
        Delete_id(index){
 
+
     	        this.$bvModal.msgBoxConfirm('Please confirm that you want to delete "'+index.Name +'".', {
     	          title: 'Please Confirm',
     	          size: 'sm',
@@ -423,12 +424,16 @@
     	          centered: true
     	        })
     	        .then(value => {
+
                 var formData = new FormData();
                 formData.append('_method','DELETE');
-                formData.append('_token',global.csrf);
+                formData.append('_token',app.config.globalProperties.csrf);
+
     	        if(value ===true){
-    	           	axios.delete( '../../MoleculeTable/'+index.ID,formData).then(
+                    console.log("ljkdsdhfkjdsf");
+    	           	axios.post( '../../MoleculeTable/'+index.ID,formData).then(
     	            response =>{
+
     	               axios.get('../../MoleculeTable').then(response =>{
     	           	      	this.items = response.data;
     	           	       	this.totalRows = this.items.length;
