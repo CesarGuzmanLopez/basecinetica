@@ -20,6 +20,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
 
-        "http://chemistry.agalano.com/ModifyBD/DB-pk-Koverall/Solvents"
+        'http://chemistry.agalano.com/ModifyBD/DB-pk-Koverall/Solvents',
+        'http://chemistry.agalano.com/'
+
     ];
 }
